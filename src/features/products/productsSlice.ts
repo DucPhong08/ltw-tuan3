@@ -13,6 +13,7 @@ const initialState: ProductsState = {
   error: null,
   selectedCategory: "All",
   searchQuery: "",
+  isSearching: false,
   dataSourceMode: "thunk",
   selectedProduct: null,
 };
@@ -46,6 +47,9 @@ export const productsSlice = createSlice({
     },
     setSearchQuery: (state, action: PayloadAction<string>) => {
       state.searchQuery = action.payload;
+    },
+    setIsSearching: (state, action: PayloadAction<boolean>) => {
+      state.isSearching = action.payload;
     },
     setDataSourceMode: (
       state,
@@ -85,6 +89,7 @@ export const productsSlice = createSlice({
 export const {
   setSelectedCategory,
   setSearchQuery,
+  setIsSearching,
   setDataSourceMode,
   openProductDetail,
   closeProductDetail,
@@ -99,6 +104,8 @@ export const selectSelectedCategory = (state: RootState) =>
   state.products.selectedCategory;
 export const selectSearchQuery = (state: RootState) =>
   state.products.searchQuery;
+export const selectIsSearching = (state: RootState) =>
+  state.products.isSearching;
 export const selectDataSourceMode = (state: RootState) =>
   state.products.dataSourceMode;
 export const selectSelectedProduct = (state: RootState) =>

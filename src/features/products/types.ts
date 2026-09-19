@@ -22,6 +22,7 @@ export interface ProductsState {
   error: string | null;
   selectedCategory: string;
   searchQuery: string;
+  isSearching: boolean;
   dataSourceMode: 'thunk' | 'rtk-query';
   selectedProduct: Product | null;
 }
