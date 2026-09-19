@@ -19,19 +19,12 @@ export const Header: React.FC = () => {
   const reduxSearchQuery = useAppSelector(selectSearchQuery);
 
   const [localSearch, setLocalSearch] = useState(reduxSearchQuery);
-  const debouncedSearch = useDebounce(localSearch, 350);
+  const debouncedSearch = useDebounce(localSearch, 300);
 
-  // Đồng bộ giá trị đã debounce vào Redux store để thực thi lọc sản phẩm
+  // Đồng bộ giá trị đã debounce vào Redux store sau 300ms người dùng ngừng gõ
   useEffect(() => {
     dispatch(setSearchQuery(debouncedSearch));
   }, [debouncedSearch, dispatch]);
-
-  // Cập nhật lại input nếu store bị reset từ nơi khác
-  useEffect(() => {
-    if (reduxSearchQuery === '' && localSearch !== '') {
-      setLocalSearch('');
-    }
-  }, [reduxSearchQuery, localSearch]);
 
   const handleClear = () => {
     setLocalSearch('');
